@@ -1,23 +1,22 @@
 from LinkedList import LinkedList
 
+def kth_to_last(ll, k ):
+    end_tracker = ll.head
+    elem_tracker = ll.head
 
-def k_to_last(k, ll):
-    p2 = ll.head
-
-    for p2Counter in range(k):
-        if p2.next == None:
+    for i in range(k):
+        if end_tracker.next:
+            end_tracker = end_tracker.next
+        else:
             return None
-        p2= p2.next
 
-    p1 = ll.head
+    while end_tracker:
+        end_tracker = end_tracker.next
+        elem_tracker = elem_tracker.next
 
-    while p2:
-        p1 = p1.next
-        p2 = p2.next
-
-    return p1
+    return elem_tracker.value
 
 ll = LinkedList()
-ll.generate(10, 0, 99)
+ll.generate(10, 0 ,99)
 print(ll)
 print(kth_to_last(ll, 3))
