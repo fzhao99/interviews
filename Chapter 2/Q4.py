@@ -10,9 +10,7 @@ def partition(ll, val):
             before_list.add(current.value)
         else:
             after_list.add(current.value)
-        current = current.next
-    print(before_list)
-    print(after_list)
+
     if before_list.tail is None:
         return after_list
     else:
