@@ -23,6 +23,14 @@ class LinkedList:
             yield current
             current = current.next
 
+    def __len__(self):
+        result = 0
+        node = self.head
+        while node:
+            result += 1
+            node = node.next
+        return result
+
     def __str__(self):
         values = [str(x) for x in self]
         return '->'.join(values)
@@ -33,8 +41,14 @@ class LinkedList:
         else:
             self.tail.next = Node(value)
             self.tail = self.tail.next
-
         return self.tail
+
+    def add_to_beginning(self, value):
+        if self.head is None:
+            self.tail = self.head = Node(value)
+        else:
+            self.head = Node(value, self.head)
+        return self.head
 
     def add_multiple(self, values):
         for v in values:

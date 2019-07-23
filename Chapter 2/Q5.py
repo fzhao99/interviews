@@ -55,10 +55,59 @@ def sum_lists(d1,d2):
         return answer
 
 
+# provided answer
+
+def sum_list_prov(ll_a,ll_b):
+    ll_a_run, ll_b_run = ll_a.head, ll_b.head
+    carry = 0
+    ans = LinkedList()
+    while ll_a_run or ll_b_run:
+        result = carry
+        if ll_a_run:
+            result += ll_a_run.value
+        if ll_b_run:
+            result += ll_b_run.value
+        ans.add(result % 10)
+        carry = result // 10
+
+        ll_a_run = ll_a_run.next
+        ll_b_run = ll_b_run.next
+
+    if carry:
+        ans.add(1)
+    return ans
+
+
+#follow up
+
+def sum_list_fol(ll_a,ll_b):
+    if len(ll_a) < len(ll_b):
+        for i in range(len(ll_b) - len(ll_a)):
+            ll_a.add_to_beginning(0)
+    else:
+        for i in range(len(ll_a) - len(ll_b)):
+            ll_b.add_to_beginning(0)
+
+    ll_a_run, ll_b_run = ll_a.head, ll_b.head
+    result = 0
+    while ll_a_run and ll_b_run:
+        result = result * 10 + ll_a_run.value + ll_b_run.value
+
+        ll_a_run = ll_a_run.next
+        ll_b_run = ll_b_run.next
+
+    ll = LinkedList()
+    for i in str(result):
+        ll.add(int(i))
+
+    return ll
+
+
+
 ll1 = LinkedList()
 ll1.generate(7, 0, 9)
 print(ll1)
 ll2 = LinkedList()
 ll2.generate(5, 0, 9)
 print(ll2)
-print(sum_lists(ll2, ll1))
+print(sum_list_fol(ll2, ll1))
