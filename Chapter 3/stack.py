@@ -1,31 +1,56 @@
+import unittest
+
 class Stack:
     class StackNode:
-        def __init__(self, data, next=None):
-            self.data = data
+        def __init__(self,value):
+            self.value = value
+            self.prev = None
             self.next = None
 
-    def __init__(self, top=None):
+    def __init__(self):
         self.top = None
+        self.size = 0
 
     def pop(self):
-        item = self.top
-        self.top = self.top.next
-        return item
-
-    def push(self, item):
-        new_top = new StackNode(item)
         if self.top:
-            self.top = new_top
-            new_top.next = self.top
+            item = self.top.value
+            self.top = self.top.prev
+            self.size -=1
+            return self.top
         else:
-            self.top = new_top
+            raise IndexError("Popping from empty stack")
+
+    def push(self, value):
+        item = self.StackNode(value)
+        if self.top:
+            item.prev = self.top
+            self.top.next = item
+            self.top = item
+        else:
+            self.top = item
+
+        self.size +=1
 
     def peek(self):
-        return self.top
+        return self.top.value
 
-    def isEmpty(self):
-        if self.top is None:
-            return True
+    def is_empty(self):
+        return self.size == 0
 
-        else:
-            return False
+class Tests(unittest.TestCase):
+    def test_push_pop(self):
+        stack = Stack()
+        for i in range(35):
+            stack.push(i)
+
+        for i in range(35, -1):
+            self.assertEqual(stack.peek(),i)
+            stack.pop()
+    def test_is_empty(self):
+        stack = Stack()
+        self.assertEqual(stack.is_empty(), True)
+
+        stack.push(5)
+        self.assertEqual(stack.is_empty(), False)
+if __name__=="__main__":
+    unittest.main()
