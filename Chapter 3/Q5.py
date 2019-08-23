@@ -11,7 +11,7 @@ class Test(unittest.TestCase):
         for _ in range(10):
             item = randint(0,100)
             stack.append(item)
-            stack_copy.append(item)
+            stack_copy.append(item) 
 
         sorted = sort_stack(stack)
         stack_copy.sort(reverse=True)
