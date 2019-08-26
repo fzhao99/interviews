@@ -1,31 +1,48 @@
 import unittest
+from data_structures.stack import Stack
 
 class SetOfStacks:
     def __init__(self, threshold):
         self.threshold = threshold
         self.stack_set = []
-        self.cur_stack = []
+
+    def get_last_stack(self):
+        try:
+            return self.stack_set[-1]
+        except IndexError:
+            return None
 
     def push(self, item):
-        if len(self.cur_stack) > self.threshold:
-            self.stack_set.append(self.cur_stack)
-            self.cur_stack = []
-        self.cur_stack.append(item)
+        cur_stack = self.get_last_stack()
+        if cur_stack and cur_stack.size < self.threshold:
+            cur_stack.push(item)
+
+        else:
+            cur_stack = Stack()
+            cur_stack.push(item)
+            self.stack_set.append(cur_stack)
 
     def pop(self):
-        if len(self.cur_stack)==0 and len(self.stack_set) >0:
-            self.cur_stack = self.stack_set.pop()
+        cur_stack = self.get_last_stack()
+        if not cur_stack:
+            raise IndexError
+        item = cur_stack.pop()
+        if cur_stack.size == 0:
+            del self.stack_set[-1]
+        return item
 
-        return self.cur_stack.pop()
+    def left_shift(self, index, remove_top):
+        stack = self.stack_set[index]
+        removed_item = stack.pop() if remove_top else stack.remove_bottom()
+        if stack.is_empty():
+            del self.stack_set[index]
+        elif len(self.stack_set) > index + 1:
+            v = self.left_shift(index +1, False)
+            stack.push(v)
+        return removed_item
 
     def pop_at(self, index):
-        if 0 < index < len(self.stack_set):
-            return self.stack_set[index].pop()
-        elif index == len(self.stack_set):
-            return self.cur_stack.pop()
-        else:
-            raise IndexError("popping from outside stack index")
-
+        return self.left_shift(index, True)
 
 class Tests(unittest.TestCase):
     def test_stacks(self):
@@ -43,7 +60,6 @@ class Tests(unittest.TestCase):
         stacks = SetOfStacks(5)
         for i in range(35):
             stacks.push(i)
-        print(stacks.stack_set)
         lst = []
 
         for _ in range(31):
