@@ -1,4 +1,4 @@
-from LinkedList import LinkedList
+from data_structures.LinkedList import LinkedList
 
 def is_palindrome(ll):
     ahead_runner = ll.head

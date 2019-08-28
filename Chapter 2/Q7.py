@@ -1,4 +1,4 @@
-from LinkedList import LinkedList
+from data_structures.LinkedList import LinkedList
 
 
 def intersection(ll_1, ll_2):

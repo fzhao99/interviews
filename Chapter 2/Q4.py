@@ -1,4 +1,4 @@
-from LinkedList import LinkedList,Node
+from data_structures.LinkedList import LinkedList
 
 def partition(ll, val):
     before_list = LinkedList()

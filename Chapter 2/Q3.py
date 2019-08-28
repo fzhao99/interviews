@@ -1,4 +1,4 @@
-from LinkedList import LinkedList
+from data_structures.LinkedList import LinkedList
 
 
 def delete_mid(n):

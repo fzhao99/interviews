@@ -1,4 +1,4 @@
-from LinkedList import LinkedList,Node
+from data_structures.LinkedList import LinkedList
 
 def sum_lists(d1,d2):
     answer = LinkedList()
