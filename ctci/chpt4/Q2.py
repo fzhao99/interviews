@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 from data_structures.bst import Node as Tree
 
 def min_tree(array):

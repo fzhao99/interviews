@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 from data_structures.LinkedList import LinkedList
 from random import randint
 import unittest

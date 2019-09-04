@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 from data_structures.LinkedList import LinkedList
 
 def remove_dups(ll):

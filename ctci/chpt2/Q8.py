@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 from data_structures.LinkedList import LinkedList
 
 def is_loop(ll):

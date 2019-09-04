@@ -1,5 +1,6 @@
+import sys
+sys.path.append("..")
 from data_structures.LinkedList import LinkedList
-
 
 def intersection(ll_1, ll_2):
     ll_1_runner = ll_1.head
