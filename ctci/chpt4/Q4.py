@@ -37,4 +37,4 @@ def check_balanced_bob(root):
 
 
 def is_balanced_bob(root):
-    return abs(check_balanced_bob(root)) <  1 
+    return abs(check_balanced_bob(root)) <  1  
